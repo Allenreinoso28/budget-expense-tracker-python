@@ -1,0 +1,28 @@
+
+
+Budget app
+
+Display Spending money Balance {
+	input paycheck form
+	}
+
+!per paycheak! {
+
+	desired (consideration factors) div
+		- input desired saving percentage
+		- input desired investing percentage
+		- expenses
+			gas
+			ttc
+			food
+		}	
+
+!output div! 
+
+	invest this much
+		- did so button
+			- total invested
+	save this much
+		- did so button
+			- total saved
+	spending money
