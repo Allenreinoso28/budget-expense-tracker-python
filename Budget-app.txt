@@ -2,27 +2,85 @@
 
 Budget app
 
-Display Spending money Balance {
-	input paycheck form
-	}
+!output div! {
 
-!per paycheak! {
+	spending money		- total invested
+
+						- total saved
+}
+
+	input form {
+		- type (paycheak/expense/savings)
+
+	}	(submit button) 
+
+	(*upon submit I want to prompt user on how much they need to put away into savings and how much they need to invest
+	so that they can do that immediately*)
+
+	
+
+!per paycheck! (biweekly) {
 
 	desired (consideration factors) div
 		- input desired saving percentage
 		- input desired investing percentage
-		- expenses
-			gas
-			ttc
-			food
-		}	
 
-!output div! 
+	expenses div 
+	- expenses/consistent (expandable)
+		ttc (3.25 * 5 * 4 * 2) (130$)
+		spotify (6.77/2) (3.38)
+		icloud (4.50/2) (2.25)
+		phone bill (90/2) (45)
+	}
+	
 
-	invest this much
-		- did so button
-			- total invested
-	save this much
-		- did so button
-			- total saved
-	spending money
+	Table 1 Budget(id/type/deductions/total value) !! Size is static but values will be changing alot
+
+	(0, wallet, null ,(spending money))
+	(1, savings, percentage, (total saved))
+	(2, investment, percentage, (total saved))
+	(3, bills, (sum of bills table * occurance of paycheck setting), null)
+
+	table 2 Bills (id/refID/name/value(monthly)) !! Table will need to editable and expandable features !!
+	(0, 3, ttc, 130)
+	(1, 3, spotify, 6.77)
+	(2, 3, icloud, 4.50)
+	(3, 3, phone, 90)
+
+
+
+
+functions
+
+	input form functions
+		Paycheck(paycheck, occurance[biweekly/monthly]);
+			updateSpendingMoney()
+				getTotalBills()
+					-checkPaycheckType() (biweekly/monthly)
+				getSavingsPerc()
+				getInvestPerc()
+				updateSavings()
+				updateInvestments()
+			alertUser()
+				**Update HTML with new Budget Table**
+				render_template('index.html', Budget=Budget)
+
+		Deposit(deposit);
+				updateSavings()
+				**Update HTML with new Budget Table**
+				render_template('index.html', Budget=Budget)
+
+		Withdraw();
+				**Update HTML with new Budget Table**
+				render_template('index.html', Budget=Budget)
+
+
+
+
+expense forms
+
+<form action="/update">
+	<input id="name" placeholder="{name of the expense}">
+	<input id="value" placeholder="{value}">
+	<button type="submit" class="btn btn-primary">Update</button>
+	
