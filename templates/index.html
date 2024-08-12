@@ -1,17 +1,55 @@
 <!DOCTYPE html>
-
-<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Expense Tracker</title>
-    <!-- Include Bootstrap CSS -->
+    <title>Budget App</title>
+     <!-- Include Bootstrap CSS -->
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Custom CSS -->
     <link rel="stylesheet" href="{{ url_for('static', filename='css/custom.css') }}">
 </head>
+
 <body>
+    <div>
+        <h1>hello world</h1>
+        <form action="/transaction" method="post" class="form-inline my-4">
+            <input type="text" name="name" class="form-control mr-2" placeholder="Name" required>
+            <input type="number" name="amount" class="form-control mr-2" placeholder="Amount" required>
+            <input type="text" name="category" class="form-control mr-2" placeholder="Category" required>
+            <button type="submit" class="btn btn-primary">Add Expense</button>
+        </form>
+    </div>
+
+
+
+
+
+    <!-- Include jQuery and Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<!-- <body>
     <div class="container mt-5">
         <h1 class="text-center">Expense Tracker</h1>
         <form action="/add" method="post" class="form-inline my-4">
@@ -38,10 +76,5 @@
                 {% endfor %}
             </tbody>
         </table>
-    </div>
-    <!-- Include jQuery and Bootstrap JS -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
-</body>
-</html>
+    </div> -->
+   
