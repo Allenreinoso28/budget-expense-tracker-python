@@ -14,7 +14,7 @@ def index():
 
 @app.route('/transaction', methods=['POST'])
 def edit_balance():
-    wdad
+    hi
 
 
 if __name__ == '__main__':
