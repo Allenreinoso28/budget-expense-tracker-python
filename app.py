@@ -12,9 +12,23 @@ def index():
     connection.close()
     return render_template('index.html', streams = streams, expenses = expenses)
 
-@app.route('/transaction', methods=['POST'])
-def edit_balance():
-    hi
+# @app.route('/transaction', methods=['POST'])
+# def edit_balance():
+#     hi
+
+@app.route('/add', methods=['POST'])
+def add_expense():
+    name = request.form['name']
+    value = request.form['value']
+    connection = sqlite3.connect('budget.db')
+    cursor = connection.cursor()
+    cursor.execute('INSERT INTO expenses (refid, name, value) VALUES ( ?, ?, ?)', (4, name, value))
+    connection.commit()
+    connection.close()
+    return redirect(url_for('index')) 
+
+
+
 
 
 if __name__ == '__main__':

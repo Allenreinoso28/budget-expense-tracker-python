@@ -11,30 +11,47 @@
 </head>
 
 <body>
-    <div class="hero-section"></div>
+    <div class="hero-section">
+        <img class="hero-logo" src="https://img.icons8.com/?size=100&id=yKpKytomTHlC&format=png&color=000000" alt="wallet logo">
+        Budgetting For Bosses
+    </div>
+
     <div class="container">
-        <div class="large-rect"></div>
-        
-        <div class="side-rects">
-            <div class="side-rect"></div>
-            <div class="side-rect"></div>
+        <div class="sub-heading">Spending Balance</div>
+        <div class="sub-heading-side"> Savings Balance</div>
+        <div class="large-rect">
+            <span id="balance">${{ '%.2f' % streams[0][3] }}</span>
         </div>
-        <div class="small-rect"></div>
-        <div class="small-rect gray"></div>
+        <div class="side-rects">
+            <div class="side-rect">
+                <span id="balance-side">${{ '%.2f' % streams[1][3] }}</span>
+            </div>
+            <div class="sub-heading-side"> Investment Balance</div>
+            <div class="side-rect">
+                <span id="balance-side">${{ '%.2f' % streams[2][3] }}</span>
+            </div>
+        </div>
+        <div class="sub-heading">Deposit/Withdraw</div>
+        <div class="deposit-rect"></div>
+
+        <div class="sub-heading">Expenses</div>
+
+            <div class="small-rect gray">
+                <form action="/add" method="post">
+                    <input type="text" name="name" placeholder="Expense Name" class="add-expense-name" required>
+                    <input type="number" name="value" placeholder="Cost per Month" class="add-expense-value" required>
+                    <button type="submit" class="add-expense-submit-btn">Add</button>
+                </form>
+            </div>
+
+
+            <div class="small-rect"></div>
+            <div class="small-rect"></div>
+            <div class="small-rect"></div>
+
     </div>
     
-    <!-- <div id="balance-details" class="container-fluid">
-        <div>
-           <td id="balance-spending-money">{{streams[0][3]}}</td> 
-        </div>
-        <div>
-            <td id="balance-savings">{{streams[1][3]}}</td>
-        </div>
-        <div>
-            <td id="balance-investments">{{streams[2][3]}}</td>
-        </div>
-        
-        
+    <!-- 
 
     </div>
     <div id="input-container" class="container-fluid">
