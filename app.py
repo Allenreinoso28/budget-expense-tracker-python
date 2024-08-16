@@ -27,17 +27,22 @@ def add_expense():
     connection.close()
     return redirect(url_for('index')) 
 
-@app.route('/update', methods=['POST'])
-def update_expense():
-    expense_id = request.form['expense_id']
-    value = request.form['value']
-    connection = sqlite3.connect('budget.db')
-    cursor = connection.cursor()
-    cursor.execute('UPDATE expenses SET value = ? WHERE expense_id = ?', (value, expense_id))
-    connection.commit()
-    connection.close()
-    return redirect(url_for('index'))
 
+@app.route('/submit/<int:id>', methods=['POST'])
+def submit(id):
+    action = request.form.get('action')
+    value = request.form.get('value')
+    
+    conn = sqlite3.connect('budget.db')
+    cursor = conn.cursor()
+
+    if action == 'update':
+        cursor.execute('UPDATE expenses SET value = ? WHERE expense_id = ?', (value, id))
+    elif action == 'delete':
+        cursor.execute('DELETE FROM expenses WHERE expense_id = ?', (id,))
+    conn.commit()
+    conn.close()
+    return redirect(url_for('index'))
 
 if __name__ == '__main__':
     connection = sqlite3.connect('budget.db')
