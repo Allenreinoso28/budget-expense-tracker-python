@@ -13,7 +13,7 @@
 <body>
     <div class="hero-section">
         <img class="hero-logo" src="https://img.icons8.com/?size=100&id=yKpKytomTHlC&format=png&color=000000" alt="wallet logo">
-        Budgetting For Bosses
+        Budgeting For Bosses
     </div>
 
     <div class="container">
@@ -45,31 +45,50 @@
             </div>
 
 
-            <div class="small-rect"></div>
-            <div class="small-rect"></div>
-            <div class="small-rect"></div>
+            <!-- <div class="small-rect"></div> -->
 
-    </div>
+
+
+            {% for expense in expenses %}
+            <div class="small-rect gray">
+                <form id="multiActionForm" method="POST">
+                        <div>{{expense[0]}}</div>
+                        <input type="hidden" name="expense_id" value="{{expense[0]}}">
+                        <div name="name">{{expense[2]}}</div>
+                        <input type="number" name="value" placeholder="{{expense[3]}}">
+                        <button type="submit" onclick="setAction('/update')">Update</button>
+                        <button type="submit" onclick="setAction('/delete')">Delete</button>
+                </form>
+            </div>
+            {% endfor %}
     
-    <!-- 
-
-    </div>
-    <div id="input-container" class="container-fluid">
-
-    </div>
-    <div>
-        <h1>hello world</h1>
-        <form action="/transaction" method="post" class="form-inline my-4">
-            <input type="text" name="name" class="form-control mr-2" placeholder="Name" required>
-            <input type="number" name="amount" class="form-control mr-2" placeholder="Amount" required>
-            <input type="text" name="category" class="form-control mr-2" placeholder="Category" required>
-            <button type="submit" class="btn btn-primary">Add Expense</button>
-        </form>
-    </div> -->
+   
 
 
 
+    <script>
+        function setAction(actionUrl) {
+            document.getElementById('multiActionForm').action = actionUrl;
+        }
 
+        // function validateAndSubmit(event) {
+        //     const form = document.getElementById('multiActionForm');
+        //     const input = form.querySelector('input[name="value"]');
+        //     const action = event.target.getAttribute('onclick');
+
+        //     // Check if the input field is empty and if the action is 'Update'
+        //     if (action.includes('/update') && !input.value) {
+        //         event.preventDefault(); // Prevent form submission
+        //     }
+        // }
+
+        // document.addEventListener('DOMContentLoaded', () => {
+        //     const form = document.getElementById('multiActionForm');
+        //     const updateButton = form.querySelector('button[onclick*="/update"]');
+
+        //     updateButton.addEventListener('click', validateAndSubmit);
+        // });
+    </script>
 
     <!-- Include jQuery and Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
