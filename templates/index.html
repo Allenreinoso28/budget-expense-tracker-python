@@ -46,7 +46,22 @@
 
 
             <!-- <div class="small-rect"></div> -->
-
+            <h1>Dynamic Forms from Database</h1>
+    <form method="post" action="/submit">
+        {% for expense in expenses %}
+            <fieldset>
+                <legend>expense {{ expense[0] }}</legend>
+                <input type="hidden" name="id" value="{{ expense[0] }}">
+                <label for="name-{{ item[0] }}">Name:</label>
+                <input type="text" id="name-{{ expense[0] }}" name="name" value="{{ expense[1] }}">
+                <br>
+                <label for="description-{{ expense[0] }}">Description:</label>
+                <textarea id="description-{{ expense[0] }}" name="description">{{ expense[2] }}</textarea>
+            </fieldset>
+            <br>
+        {% endfor %}
+        <button type="submit">Submit</button>
+    </form>
 
 
             {% for expense in expenses %}
