@@ -35,7 +35,7 @@ body {
 
 
 
-.large-rect, .small-rect, .deposit-rect, .side-rect {
+.large-rect, .small-rect, .deposit-rect, .side-rect, .percent-savings-rect, .percent-investments-rect {
     background-color: #f8f8f8;
     border-radius: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -53,10 +53,37 @@ body {
     font-size: 80px;
 }
 
-.deposit-rect {
-    grid-column: span 2;
+.input-container{
+    grid-column: span 3;
+    display: flex;
+}
+
+
+.inline-div {
+    display: inline-flex;
+    margin: 10px;
+    margin-right: 10px; /* Adjust margin as needed */
+    background-color: #f8f8f8;
+    border-radius: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    justify-content: flex-start; /* Aligns items at the start */
+    align-items: center; /* Aligns items vertically centered */
+
+}
+.inline-div.deposit{
+    width: 893px;
     height: 90px;
 }
+.inline-div.percent{
+    height: 90px;
+    width: 200px
+}
+.percent-input{
+    width: 140px;
+    height: 40px;
+    margin-left: 30px;
+}
+
 
 .small-rect {
     grid-column: span 2;
@@ -99,6 +126,14 @@ body {
     padding-left: 20px;
     font-size: x-large;
     color: #8f8f8f;
+}
+
+.sub-heading.percent{
+    grid-column: span 1;
+    display: flex;
+}
+.sub-heading-percent-title{
+    padding-left: 80px;
 }
 
 .add-expense-name, .add-expense-value, .add-expense-submit-btn, .wrapper{

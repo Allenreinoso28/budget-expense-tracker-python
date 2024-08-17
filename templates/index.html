@@ -32,24 +32,46 @@
             </div>
         </div>
         <div class="sub-heading">Deposit/Withdraw</div>
-        <div class="deposit-rect"></div>
+        <div class="sub-heading percent">
+            <div>Savings%</div>
+            <div class="sub-heading-percent-title">Investments%</div>
+        </div>
+        
+        <div class="input-container">
+            <form action="/submit" method="post" autocomplete="off">
+                <div class="inline-div deposit">
+                    <label for="name">Amount $:</label>
+                    <input type="text" class="deposit-input" name="deposit" min="0">
+                    <select id="cars" name="cars">
+                        <option value="withdraw">Withdraw</option>
+                        <option value="paycheck">Deposit Paycheck</option>
+                        <option value="deposit">Deposit to Savings</option>
+                      </select>
+                    <button type="submit">Submit</button>
+                </div>
+                <div class="inline-div percent">
+                    <input type="number" class="percent-input" name="email" min="0" max="100">
+                </div>
+                <div class="inline-div percent">
+                    <input type="number" class="percent-input" name="phone" min="0" max="100">
+                </div>
+            </form>  
+        </div>
+       
 
         <div class="sub-heading">Expenses</div>
 
             <div class="small-rect gray">
-                <form action="/add" method="post">
+                <form action="/add" method="post" autocomplete="off">
                     <input type="text" name="name" placeholder="Expense Name" class="add-expense-name" required>
                     <input type="number" name="value" placeholder="Cost per Month" class="add-expense-value" required>
                     <button type="submit" class="add-expense-submit-btn">Add</button>
                 </form>
             </div>
-
-
-            <div class="small-rect"></div>
             
             {% for expense in expenses %}
             <div class="small-rect">
-                <form method="post" action="{{ url_for('submit', id=expense[0]) }}">
+                <form method="post" action="{{ url_for('submit', id=expense[0]) }}" autocomplete="off">
                         <input type="hidden" value="update">
                         <input type="hidden" name="action" value="">
                         <div>{{expense[0]}}</div>
@@ -63,13 +85,13 @@
             </div>
             {% endfor %}
 
+    <script>
+        function setActionAndSubmit(form, action) {
+            form.querySelector('input[name="action"]').value = action;
+            form.submit();
+        }
+    </script>
 
-<script>
-    function setActionAndSubmit(form, action) {
-        form.querySelector('input[name="action"]').value = action;
-        form.submit();
-    }
-</script>
 
     <!-- Include jQuery and Bootstrap JS -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
