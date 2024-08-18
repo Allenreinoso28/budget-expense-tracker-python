@@ -12,9 +12,9 @@ def index():
     connection.close()
     return render_template('index.html', streams = streams, expenses = expenses)
 
-# @app.route('/transaction', methods=['POST'])
-# def edit_balance():
-#     hi
+@app.route('/transaction', methods=['POST'])
+def edit_balance():
+    hi
 
 @app.route('/add', methods=['POST'])
 def add_expense():

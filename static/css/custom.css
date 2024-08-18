@@ -63,25 +63,98 @@ body {
     display: inline-flex;
     margin: 10px;
     margin-right: 10px; /* Adjust margin as needed */
-    background-color: #f8f8f8;
+    background-color: #c2c1c1;
     border-radius: 20px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
     justify-content: flex-start; /* Aligns items at the start */
     align-items: center; /* Aligns items vertically centered */
+    border-width: 0px;
+    border-color: #8f8f8f;
+    font-size: x-large;
+    outline: #8f8f8f;
+    color: #474747;
 
 }
 .inline-div.deposit{
     width: 893px;
     height: 90px;
+    align-content: center;
 }
+
+.deposit-input{
+    height: 60px;
+    border-color: #e0e0e0;
+    border: 0px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-top-right-radius: 15px;
+    border-bottom-right-radius: 15px;
+    padding-left: 10px;
+    font-size: 40px;
+    width: 400px;
+}
+
+.deposit-options{
+    margin-left: 20px;
+    height: 50px;
+    border-color: #e0e0e0;
+    border: 0px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    padding-left: 10px;
+    padding-right: 5px;
+    font-size: 25px;
+    color: #000000;
+}
+
+.deposit-input-span{
+    color: #000000;
+    padding-top: 7px;
+    padding-left: 12px;
+    width: 35px;
+    margin-left: 20px;
+    background-color: #e0e0e0;
+    height: 60px;
+    font-size: 30px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+
+}
+
+.deposit-submit{
+    margin-left: 25px;
+    height: 50px;
+    border-color: #5c5c5c;
+    border: 0px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-size: 25px;
+    color: #000000;
+    background-color: #949494;
+    width: 125px;
+}
+
+.deposit-submit:hover{
+    background-color: #a7a5a5;
+}
+
+
 .inline-div.percent{
     height: 90px;
-    width: 200px
+    width: 200px;
 }
 .percent-input{
-    width: 140px;
+    font-size: 40px;
+    width: 120px;
     height: 40px;
-    margin-left: 30px;
+    margin-left: 20px;
+    margin-right: 5px;
+    color: #474747;
+    border: 0px;
+    border-color: #f8f8f8;
+    background-color: #c2c1c1;
 }
 
 
@@ -133,7 +206,7 @@ body {
     display: flex;
 }
 .sub-heading-percent-title{
-    padding-left: 80px;
+    padding-left: 125px;
 }
 
 .add-expense-name, .add-expense-value, .add-expense-submit-btn, .wrapper{
