@@ -3,6 +3,18 @@ import sqlite3
 
 app = Flask(__name__)
 
+def getExpensesTotal():
+    connection = sqlite3.connect('budget.db')
+    cursor = connection.cursor()
+    try:
+        total = cursor.execute('SELECT SUM(value) FROM expenses').fetchone()[0]/2
+    except (TypeError):
+        total = 0
+    connection.close()
+    return total
+
+
+
 @app.route('/')
 def index():
     connection = sqlite3.connect('budget.db')
@@ -14,7 +26,53 @@ def index():
 
 @app.route('/transaction', methods=['POST'])
 def edit_balance():
-    hi
+
+    transactionType = request.form['transaction-type']
+    inputValue = float(request.form['deposit'])
+
+    connection = sqlite3.connect('budget.db')
+    cursor = connection.cursor()
+    streams = cursor.execute('SELECT * FROM streams').fetchall()
+    spendingBal = streams[0][3]
+    savingsBal = streams[1][3]
+    investmentsBal = streams[2][3]
+    spendingValId = 1
+    savingsValId = 2
+    investmentsValId = 3
+
+    if transactionType == 'withdraw':
+        cursor.execute('UPDATE streams SET value = ? WHERE id = ?', (spendingBal-inputValue, spendingValId))
+
+    elif transactionType == 'deposit':
+        cursor.execute('UPDATE streams SET value = ? WHERE id = ?', (savingsBal+inputValue, savingsValId))
+
+    else:
+        #check if perecentages have been updated
+
+        #error handle if percentages are greater than 100%
+        #add a total expenses in html and update streams any time something happens with expenses
+        totalExpenses = getExpensesTotal()
+        postExpenses = inputValue - totalExpenses
+        #expenses will be deducted first then the percentage will be cut
+        savingsPercentage = streams[1][2] / 100
+        savingsDeduction = postExpenses * savingsPercentage
+        investmentsPercentage = streams[2][2] / 100
+        investmentsDeduction = postExpenses * investmentsPercentage
+
+        leftover = postExpenses - savingsDeduction - investmentsDeduction
+        cursor.execute('UPDATE streams SET value = ? WHERE id = ?', (spendingBal+leftover, spendingValId))
+        cursor.execute('UPDATE streams SET value = ? WHERE id = ?', (savingsBal+savingsDeduction, savingsValId))
+        cursor.execute('UPDATE streams SET value = ? WHERE id = ?', (investmentsBal+investmentsDeduction, investmentsValId))
+    
+    connection.commit()
+    connection.close()
+    return redirect(url_for('index')) 
+
+
+                
+        
+
+    
 
 @app.route('/add', methods=['POST'])
 def add_expense():

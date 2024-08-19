@@ -223,16 +223,17 @@ body {
 
 .add-expense-name{
     width: 300px;
-    margin-left: 20px;
 }
 
 .add-expense-value{
     width: 270px;
 }
 
+
 .add-expense-submit-btn{
     background-color: #cccccc;
     width: 80px;
+    margin-left: 20px;
 }
 
 .add-expense-submit-btn:active{
@@ -245,3 +246,97 @@ body {
     background-color: #dbdbdb;
    }
    
+.small-rect.output{
+    display: flex;
+}
+
+.output-form{
+    display: flex;
+    justify-items: center;
+    align-items: center;
+}
+
+.output-expense{
+    background-color: #f8f8f8;
+    border-radius: 15px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    border-width: 0px;
+    border-color: #8f8f8f;
+    padding: 10px;
+    font-size: large;
+    outline: #8f8f8f;
+    height: 45px;
+}
+
+.output-expense-value{
+    background-color: #f8f8f8;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-width: 0px;
+    border-color: #8f8f8f;
+    padding: 10px;
+    font-size: large;
+    outline: #8f8f8f;
+    height: 45px;
+    border-bottom-right-radius: 15px;
+    border-top-right-radius: 15px;
+    margin-right: 10px;
+    width: 120px;
+}
+
+.output-span{
+    color: #000000;
+    padding-top: 7px;
+    padding-left: 12px;
+    width: 30px;
+    margin-left: 10px;
+    background-color: #e0e0e0;
+    height: 45px;
+    font-size: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+.output-span.name{
+    color: #000000;
+    padding-top: 7px;
+    padding-left: 12px;
+    width: 80px;
+    margin-left: 20px;
+    background-color: #e0e0e0;
+    height: 45px;
+    font-size: 20px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    border-top-left-radius: 15px;
+    border-bottom-left-radius: 15px;
+}
+
+
+.output-expense.name{
+    background-color: #f5f5f5;
+    width: 200px;
+    overflow: hidden;
+    margin-left: 0px;
+    border-top-left-radius: 0px;
+    border-bottom-left-radius: 0px;
+}
+
+.output-expense.update{
+    width: 100px;
+    margin-left: 25px;
+    background-color: #e0e0e0;
+}
+.output-expense.update:hover{
+    background-color: #b1b1b1;
+}
+
+.output-expense.delete{
+    margin-left: 15px;
+    width: 80px;
+    background-color: #5c5c5c;
+    color: #b3b3b3;
+}
+.output-expense.delete:hover{
+    background-color: #838383;
+}

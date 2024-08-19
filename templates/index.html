@@ -49,14 +49,14 @@
                     <span class="deposit-input-span">$</span>
                     <input type="number" class="deposit-input" name="deposit" min="0" required>
 
-                    <button class="deposit-submit" type="submit">Submit</button>
+                    <button class="deposit-submit" type="submit" onclick="confirmSubmission(event)">Submit</button>
                 </div>
                 <div class="inline-div percent">
                     <input type="number" class="percent-input" name="savingsPercent" min="0" max="100" placeholder="{{ '%.0f' % streams[1][2] }}">
                     <span>%</span>
                 </div>
                 <div class="inline-div percent">
-                    <input type="number" class="percent-input" name="investmentPercent" min="0" max="100" placeholder="{{ '%.0f' % streams[2][2] }}">
+                    <input type="number" class="percent-input" name="investmentsPercent" min="0" max="100" placeholder="{{ '%.0f' % streams[2][2] }}">
                     <span>%</span>
                 </div>
             </form>  
@@ -74,17 +74,18 @@
             </div>
             
             {% for expense in expenses %}
-            <div class="small-rect">
-                <form method="post" action="{{ url_for('submit', id=expense[0]) }}" autocomplete="off">
-                        <input type="hidden" value="update">
+            <div class="small-rect output">
+                <form class="output-form" method="post" action="{{ url_for('submit', id=expense[0]) }}" autocomplete="off">
+                        <!-- <input type="hidden" value="update"> -->
                         <input type="hidden" name="action" value="">
-                        <div>{{expense[0]}}</div>
-                        <input type="hidden" name="expense_id" value="{{expense[0]}}">
-                        <div name="name">{{expense[2]}}</div>
-                        <input type="number" name="value" placeholder="{{ '%.2f' % expense[3] }}">
+                        <!-- <input type="hidden" name="expense_id" value="{{expense[0]}}"> -->
+                        <span class="output-span name">Name:</span>
+                        <label class="output-expense name" name="name">{{expense[2]}}</label>
+                        <span class="output-span">$</span>
+                        <input class="output-expense-value" type="number" name="value" placeholder="{{ '%.2f' % expense[3] }}">
             
-                        <button type="button" onclick="setActionAndSubmit(this.form, 'update')">Update</button>
-                        <button type="button" onclick="setActionAndSubmit(this.form, 'delete')">Delete</button>
+                        <button class="output-expense update" type="button" onclick="confirmSubmission(setActionAndSubmit(this.form, 'update'))">Update</button>
+                        <button class="output-expense delete" type="button" onclick="confirmSubmission(setActionAndSubmit(this.form, 'delete'))">Delete</button>
                 </form>
             </div>
             {% endfor %}
@@ -93,6 +94,15 @@
         function setActionAndSubmit(form, action) {
             form.querySelector('input[name="action"]').value = action;
             form.submit();
+        }
+    </script>
+
+    <script>
+        function confirmSubmission(event) {
+            var confirmation = confirm("Are you sure you want to submit the form?");
+            if (!confirmation) {
+                event.preventDefault(); // Prevent the form from being submitted
+            }
         }
     </script>
 
