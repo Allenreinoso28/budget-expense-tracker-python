@@ -8,12 +8,29 @@ def getExpensesTotal():
     cursor = connection.cursor()
     try:
         total = cursor.execute('SELECT SUM(value) FROM expenses').fetchone()[0]/2
+
     except (TypeError):
         total = 0
+    
     connection.close()
     return total
 
+def updateExpenses():
+    connection = sqlite3.connect('budget.db')
+    cursor = connection.cursor()
 
+    try:
+        total = cursor.execute('SELECT SUM(value) FROM expenses').fetchone()[0]
+        cursor.execute('UPDATE streams SET value = ? WHERE id = ?', (total, 4))
+        cursor.execute('UPDATE streams SET deduction = ? WHERE id = ?', (total/2, 4))
+        
+    except (TypeError):
+        cursor.execute('UPDATE streams SET value = ? WHERE id = ?', (0, 4))
+        cursor.execute('UPDATE streams SET deduction = ? WHERE id = ?', (0, 4))        
+
+    connection.commit()
+    connection.close()
+    
 
 @app.route('/')
 def index():
@@ -50,7 +67,6 @@ def edit_balance():
         #check if perecentages have been updated
 
         #error handle if percentages are greater than 100%
-        #add a total expenses in html and update streams any time something happens with expenses
         totalExpenses = getExpensesTotal()
         postExpenses = inputValue - totalExpenses
         #expenses will be deducted first then the percentage will be cut
@@ -83,6 +99,7 @@ def add_expense():
     cursor.execute('INSERT INTO expenses (refid, name, value) VALUES ( ?, ?, ?)', (4, name, value))
     connection.commit()
     connection.close()
+    updateExpenses()
     return redirect(url_for('index')) 
 
 
@@ -100,7 +117,27 @@ def submit(id):
         cursor.execute('DELETE FROM expenses WHERE expense_id = ?', (id,))
     conn.commit()
     conn.close()
+    updateExpenses()
     return redirect(url_for('index'))
+
+
+@app.route('/clear', methods=['POST'])
+def clear():
+    location = request.form['location']
+
+    conn = sqlite3.connect('budget.db')
+    cursor = conn.cursor()
+    
+    if (location == 'savings'):
+        cursor.execute('UPDATE streams Set value = ? WHERE id = ?', (0,2))
+    else:
+        cursor.execute('UPDATE streams Set value = ? WHERE id = ?', (0,3))
+    
+    conn.commit()
+    conn.close()
+    return redirect(url_for('index'))
+
+
 
 if __name__ == '__main__':
     connection = sqlite3.connect('budget.db')

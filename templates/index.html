@@ -18,7 +18,14 @@
 
     <div class="container">
         <div class="sub-heading">Spending Balance</div>
-        <div class="sub-heading-side"> Savings Balance</div>
+        <div class="sub-heading-side"> Savings Balance
+            <form action="/clear" method="post">
+                <input type="hidden" name="location" value="savings">
+                <button type="submit" onclick="confirmSubmission(event)">clear</button>
+            </form>
+        </div>
+
+        
         <div class="large-rect">
             <span id="balance">${{ '%.2f' % streams[0][3] }}</span>
         </div>
@@ -26,19 +33,26 @@
             <div class="side-rect">
                 <span id="balance-side">${{ '%.2f' % streams[1][3] }}</span>
             </div>
-            <div class="sub-heading-side"> Investment Balance</div>
+            <div class="sub-heading-side"> Investment Balance
+                <form action="/clear"  method="post">
+                    <input type="hidden" name="location" value="investments">
+                    <button type="submit" onclick="confirmSubmission(event)">clear</button>
+                </form>
+            </div>
             <div class="side-rect">
                 <span id="balance-side">${{ '%.2f' % streams[2][3] }}</span>
             </div>
         </div>
+
         <div class="sub-heading">Deposit/Withdraw</div>
+
         <div class="sub-heading percent">
             <div>Savings%</div>
             <div class="sub-heading-percent-title">Investments%</div>
         </div>
         
         <div class="input-container">
-            <form action="/transaction" method="post" autocomplete="off">
+            <form action="/transaction" method="post" autocomplete="off" id="transaction-form">
                 <div class="inline-div deposit">
                     <select class="deposit-options" name="transaction-type">
                         <option value="withdraw">Withdraw</option>
@@ -49,14 +63,14 @@
                     <span class="deposit-input-span">$</span>
                     <input type="number" class="deposit-input" name="deposit" min="0" required>
 
-                    <button class="deposit-submit" type="submit" onclick="confirmSubmission(event)">Submit</button>
+                    <button class="deposit-submit" type="submit" onclick="confirmSubmission(event);validatePercentages(event)">Submit</button>
                 </div>
                 <div class="inline-div percent">
-                    <input type="number" class="percent-input" name="savingsPercent" min="0" max="100" placeholder="{{ '%.0f' % streams[1][2] }}">
+                    <input id="percent1" type="number" class="percent-input" name="savingsPercent" min="0" max="100" placeholder="{{ '%.0f' % streams[1][2] }}">
                     <span>%</span>
                 </div>
                 <div class="inline-div percent">
-                    <input type="number" class="percent-input" name="investmentsPercent" min="0" max="100" placeholder="{{ '%.0f' % streams[2][2] }}">
+                    <input id="percent2" type="number" class="percent-input" name="investmentsPercent" min="0" max="100" placeholder="{{ '%.0f' % streams[2][2] }}">
                     <span>%</span>
                 </div>
             </form>  
@@ -64,6 +78,8 @@
        
 
         <div class="sub-heading">Expenses</div>
+        <div class="sub-heading-side"> Expenses per Month</div>
+
 
             <div class="small-rect gray">
                 <form action="/add" method="post" autocomplete="off">
@@ -71,6 +87,10 @@
                     <input type="number" name="value" placeholder="Cost per Month" class="add-expense-value" required>
                     <button type="submit" class="add-expense-submit-btn">Add</button>
                 </form>
+            </div>
+
+            <div class="side-rect expenses">
+                <span id="balance-side">${{ '%.2f' % streams[3][3] }}</span>
             </div>
             
             {% for expense in expenses %}
@@ -99,9 +119,29 @@
 
     <script>
         function confirmSubmission(event) {
-            var confirmation = confirm("Are you sure you want to submit the form?");
+            var confirmation = confirm("You sure you wanna do that bruh?");
             if (!confirmation) {
                 event.preventDefault(); // Prevent the form from being submitted
+            }
+        }
+    </script>
+
+    <script>
+        function validatePercentages(event) {
+            const percent1 = document.getElementById('percent1');
+            const percent2 = document.getElementById('percent2');
+
+            // Get values or placeholders
+            const value1 = percent1.value ? parseInt(percent1.value) : parseInt(percent1.placeholder);
+            const value2 = percent2.value ? parseInt(percent2.value) : parseInt(percent2.placeholder);
+
+            // Calculate sum
+            const sum = value1 + value2;
+
+            // Check if sum is 100 or more
+            if (sum > 100) {
+                event.preventDefault(); // Prevent form submission
+                alert("The sum of the percentages must be less than 100.");
             }
         }
     </script>

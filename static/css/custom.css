@@ -186,6 +186,12 @@ body {
     font-size: 40px;
 }
 
+.side-rect.expenses{
+    height: 90px;
+    font-size: 35px;
+    color: #2e2e2e;
+}
+
 
 .sub-heading{
     grid-column: span 2;
@@ -199,6 +205,7 @@ body {
     padding-left: 20px;
     font-size: x-large;
     color: #8f8f8f;
+    display: flex;
 }
 
 .sub-heading.percent{
