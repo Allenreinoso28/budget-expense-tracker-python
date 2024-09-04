@@ -15,6 +15,28 @@ def getExpensesTotal():
     connection.close()
     return total
 
+def getPercent(type):
+    connection = sqlite3.connect('budget.db')
+    cursor = connection.cursor()
+    if type == 'savings':
+        percent = cursor.execute('SELECT deduction FROM streams WHERE id = ?', (2,)).fetchone()[0]
+    else:
+        percent = cursor.execute('SELECT deduction FROM streams WHERE id = ?', (3,)).fetchone()[0]
+
+    connection.close()
+    return percent
+
+def updatePercent(type, percent):
+    connection = sqlite3.connect('budget.db')
+    cursor = connection.cursor()
+    if type == 'savings':
+        cursor.execute('UPDATE streams SET deduction = ? WHERE id = ?', (percent, 2))
+    else:
+        cursor.execute('UPDATE streams SET deduction = ? WHERE id = ?', (percent, 3))
+    connection.commit()
+    connection.close()
+
+
 def updateExpenses():
     connection = sqlite3.connect('budget.db')
     cursor = connection.cursor()
@@ -46,6 +68,21 @@ def edit_balance():
 
     transactionType = request.form['transaction-type']
     inputValue = float(request.form['deposit'])
+    #checking the percent inputs
+
+    percent1 = request.form['savingsPercent']
+    if percent1 == '':
+        percent1 = getPercent('savings')
+    else:
+        percent1 = float(percent1)
+        updatePercent('savings', percent1)
+
+    percent2 = request.form['investmentsPercent']
+    if percent2 == '':
+        percent2 = getPercent('investments')
+    else:
+        percent2 = float(percent2)
+        updatePercent('investments', percent2)
 
     connection = sqlite3.connect('budget.db')
     cursor = connection.cursor()
@@ -64,15 +101,13 @@ def edit_balance():
         cursor.execute('UPDATE streams SET value = ? WHERE id = ?', (savingsBal+inputValue, savingsValId))
 
     else:
-        #check if perecentages have been updated
-
         #error handle if percentages are greater than 100%
-        totalExpenses = getExpensesTotal()
+        totalExpenses = streams[3][2]
         postExpenses = inputValue - totalExpenses
         #expenses will be deducted first then the percentage will be cut
-        savingsPercentage = streams[1][2] / 100
+        savingsPercentage = percent1 / 100
         savingsDeduction = postExpenses * savingsPercentage
-        investmentsPercentage = streams[2][2] / 100
+        investmentsPercentage = percent1 / 100
         investmentsDeduction = postExpenses * investmentsPercentage
 
         leftover = postExpenses - savingsDeduction - investmentsDeduction

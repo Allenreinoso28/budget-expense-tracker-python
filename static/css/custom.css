@@ -192,6 +192,21 @@ body {
     color: #2e2e2e;
 }
 
+.clear-btn{
+    text-decoration: underline;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 15px;
+    /* margin: 10px; */
+    border-width: 0px;
+    font-size: 20px;
+    outline: #8f8f8f;
+    height: 36px;
+    color: #8f8f8f;
+    margin-left: 10px;
+}
+
 
 .sub-heading{
     grid-column: span 2;
