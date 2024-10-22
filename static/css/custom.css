@@ -2,7 +2,7 @@ body {
     justify-content: center;
     align-items: center;
     margin: 0;
-    background-color: #f0f0f0;
+    background-color: #dddddd;
     font-family: Helvetica;
 }
 
@@ -72,7 +72,7 @@ body {
     border-color: #8f8f8f;
     font-size: x-large;
     outline: #8f8f8f;
-    color: #474747;
+    color: #000000;
 
 }
 .inline-div.deposit{
@@ -165,7 +165,7 @@ body {
 }
 
 .small-rect.gray {
-    background-color: #e0e0e0;
+    background-color: #c9c9c9;
     display: flex;
     justify-content: flex-start; /* Aligns items at the start */
     align-items: center; /* Aligns items vertically centered */
@@ -189,7 +189,7 @@ body {
 .side-rect.expenses{
     height: 90px;
     font-size: 35px;
-    color: #2e2e2e;
+    color: #000000;
 }
 
 .clear-btn{
@@ -203,7 +203,7 @@ body {
     font-size: 20px;
     outline: #8f8f8f;
     height: 36px;
-    color: #8f8f8f;
+    color: #000000;
     margin-left: 10px;
 }
 
@@ -212,14 +212,14 @@ body {
     grid-column: span 2;
     padding-left: 20px;
     font-size: x-large;
-    color: #8f8f8f;
+    color: #000000;
 }
 
 .sub-heading-side{
     grid-column: span 1;
     padding-left: 20px;
     font-size: x-large;
-    color: #8f8f8f;
+    color: #000000;
     display: flex;
 }
 
@@ -253,7 +253,7 @@ body {
 
 
 .add-expense-submit-btn{
-    background-color: #cccccc;
+    background-color: #979797;
     width: 80px;
     margin-left: 20px;
 }
@@ -356,8 +356,8 @@ body {
 .output-expense.delete{
     margin-left: 15px;
     width: 80px;
-    background-color: #5c5c5c;
-    color: #b3b3b3;
+    background-color: #969696;
+    color: #000000;
 }
 .output-expense.delete:hover{
     background-color: #838383;
