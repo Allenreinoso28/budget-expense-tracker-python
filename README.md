@@ -20,24 +20,20 @@ Database: SQLite
 Clone the repository:
 
 ```bash
-Copy code
 git clone https://github.com/Allenreinoso28/budget-expense-tracker-python.git
 ```
 Navigate to the project directory:
 
 ```bash
-Copy code
 cd budget-expense-tracker-python
 ```
 Install the required packages:
 ```bash
-Copy code
 pip install -r requirements.txt
 ```
 
 Run the application:
 ```bash
-Copy code
 python app.py
 ```
 Open your web browser and go to http://127.0.0.1:5000.
@@ -51,13 +47,13 @@ Set Budgets: Define budgets for different categories to manage your spending.
 
 
 
-Contributions are welcome! If you have suggestions for improvements or features, feel free to create a pull request or open an issue.
+### Contributions are welcome! If you have suggestions for improvements or features, feel free to create a pull request or open an issue.
 
-License
+## License
 This project is licensed under the MIT License. See the LICENSE file for more information.
 
-Contact
+## Contact
 If you have any questions or feedback, feel free to reach out to me:
 
-Email: your.email@example.com
+Email: allen.j.reinoso@gmail.com
 GitHub: Allenreinoso28
