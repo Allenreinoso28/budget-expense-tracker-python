@@ -13,7 +13,9 @@ Responsive Design: Access the application on various devices with a responsive u
 
 ## Technologies Used
 Frontend: HTML, CSS, JavaScript
+
 Backend: Python, Flask
+
 Database: SQLite
 
 ## Installation
